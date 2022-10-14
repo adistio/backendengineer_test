@@ -15,4 +15,5 @@ app.use(express.json());
 app.use('/', home);
 app.use('/activity-groups', activitygroups);
  
+
 app.listen(3000, () => console.log('Server running at port 3000'));
