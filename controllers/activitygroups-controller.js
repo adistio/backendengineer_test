@@ -1,12 +1,17 @@
 // import models
 import Activitygroups from "../models/activitygroups-model.js";
  
+
 // function get All
 export const getAll = async (req, res) => {
     try {
-        const activitygroups = await Activitygroups.findAll();
-        // console.log(activitygroups);
-        res.status(200).json(activitygroups);
+        const data = await Activitygroups.findAll();
+        const response = {
+            "status":"Success",
+            "message":"Success",
+            "data": data
+        };
+        res.status(200).json(response);
     } catch (error) {
         res.status(500).json({message: error.message});
     }     
@@ -16,53 +21,85 @@ export const getAll = async (req, res) => {
 // function get single data
 export const getDataById = async (req, res) => {
     try {
-        const activitygroups = await Activitygroups.findOne({
+        const data = await Activitygroups.findOne({
             where: {
                 id: req.params.id
             }
         });
-        res.json(activitygroups);
+        const response = {
+            "status":"Success",
+            "message":"Success",
+            "data": data
+        };
+        res.status(200).json(response);
     } catch (error) {
         res.status(404).json({message: error.message});
     }
-     
 }
  
-// function Create User
+
+// function save data
 export const saveData = async (req, res) => {
-    const data = new Activitygroups(req.body);
     try {
-        const savedData = data.save();
-        res.status(201).json({msg: "User Created",});
+        const data = await Activitygroups.create(req.body);
+        const response = {
+            "status":"Success",
+            "message":"Success",
+            "data": data
+        };
+        res.status(201).json(response);
     } catch (error) {
         res.status(400).json({message: error.message});
     }
 }
  
 
-// function Update
+// function Update data
 export const updateData = async (req, res) => {
     try {
-        await Activitygroups.update(req.body,{
+        const data = await Activitygroups.update(req.body, {
             where:{
                 id: req.params.id
             }
         });
-        res.status(200).json({msg: "User Updated"});
+        const response = {
+            "status":"Success",
+            "message":"Success",
+            "data": data
+        };
+        res.status(200).json(response);
     } catch (error) {
         res.status(400).json({message: error.message});
     }
 }
  
-// // function Delete
+
+// function Delete data
 export const deleteData = async (req, res) => {
+    var response;
     try {
-        await Activitygroups.destroy({
+        const data = await Activitygroups.destroy({
             where:{
                 id: req.params.id
             }
+        }).then(function (deletedRecord) {
+            if(deletedRecord === 1){
+                response = {
+                    "status":"Success",
+                    "message":"Success",
+                    "data": deletedRecord
+                }; 
+            } else {
+                response = {
+                    "status":"Not Found",
+                    "message":"Activity with ID 1381738 Not Found",
+                    "data": {}
+                };
+            }
+        }).catch(function (error){
+            res.status(400).json({message: error.message});
         });
-        res.status(200).json({msg: "User Deleted"});
+        res.status(200).json(response);
     } catch (error) {
         res.status(400).json({message: error.message});
     }

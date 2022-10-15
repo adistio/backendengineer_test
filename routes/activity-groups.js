@@ -11,11 +11,11 @@ const router = express.Router();
 router.get('/', getAll);
 // Route get single Data
 router.get('/:id', getDataById);
-// Route CREATE Data
+// Route create Data
 router.post('/', saveData);
-// Route DELETE
+// Route delete Data
 router.delete('/:id', deleteData);
-// Route UPDATE User
+// Route update Data
 router.patch('/:id', updateData);
 
 // export router
