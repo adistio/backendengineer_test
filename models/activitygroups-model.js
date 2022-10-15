@@ -3,7 +3,7 @@ import db from "../config/database.js";
  
 const { DataTypes } = Sequelize;
  
-const Activitygroups = db.define('activity_groups',{
+const Activitygroups = db.define('activities',{
     id: {
         allowNull: false,
         autoIncrement: true,
