@@ -12,7 +12,6 @@ const Activitygroups = db.define('activities',{
     },
     title: {
         type: DataTypes.STRING,
-        required: true,
     },
     email: {
         type: DataTypes.STRING,
