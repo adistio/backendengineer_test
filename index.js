@@ -18,4 +18,4 @@ app.use('/activity-groups', activitygroups);
 app.use('/todo-items', todoitems);
  
 
-app.listen(8090, () => console.log('Server running at port 3000'));
+app.listen(8090, () => console.log('Server running'));
