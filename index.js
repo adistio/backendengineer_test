@@ -14,24 +14,26 @@ app.use('/', home);
 app.use('/activity-groups', activitygroups);
 app.use('/todo-items', todoitems);
  
-var httpServer = http.createServer((request, response) => {
-    request.on('error', (error) => {
-        console.error('> THERE WAS AN ERROR', error)
-    })
+// var httpServer = http.createServer((request, response) => {
+//     request.on('error', (error) => {
+//         console.error('> THERE WAS AN ERROR', error)
+//     })
 
-    request.on('close', () => {
-        if(request.readableEnded) {
-          console.log('> REQUEST GOT CLOSED')
-          response.end('CLOSED');
-        } else {
-          console.log('> REQUEST GOT ABORTED')
-        }
-    })
+//     request.on('close', () => {
+//         if(request.readableEnded) {
+//           console.log('> REQUEST GOT CLOSED')
+//           response.end('CLOSED');
+//         } else {
+//           console.log('> REQUEST GOT ABORTED')
+//         }
+//     })
 
-    request.resume(); // CONSUME ALL DATA
-},app);
+//     request.resume(); // CONSUME ALL DATA
+// }, app);
+
+var httpServer = http.createServer(app);
 httpServer.on('listening', () => console.log('HTTP-Server is running.'));
-httpServer.listen(8090, '127.0.0.1');
+httpServer.listen(3030, '0.0.0.0');
 // httpServer.listen(3030, '127.0.0.1');
 // httpServer.listen(3030);
 // app.listen(8090, () => console.log('Server running'));
