@@ -3,19 +3,35 @@ import home from "./routes/home.js";
 import activitygroups from "./routes/activity-groups.js";
 import todoitems from "./routes/todo-items.js";
 import cors from "cors";
-import http from "http"; 
-import throttle from "express-throttle";
+import http from "http";
 
 const app = express();
  
 app.use(cors());
 app.use(express.json());
 
-app.use('/', throttle({ "rate": "5/s" }), home);
-app.use('/activity-groups', throttle({ "rate": "5/s" }), activitygroups);
-app.use('/todo-items', throttle({ "rate": "5/s" }), todoitems);
+app.use('/', home);
+app.use('/activity-groups', activitygroups);
+app.use('/todo-items', todoitems);
  
-var httpServer = http.createServer(app);
-// httpServer.listen(8090);
-httpServer.listen(3030);
+var httpServer = http.createServer((request, response) => {
+    request.on('error', (error) => {
+        console.error('> THERE WAS AN ERROR', error)
+    })
+
+    request.on('close', () => {
+        if(request.readableEnded) {
+          console.log('> REQUEST GOT CLOSED')
+          response.end('CLOSED');
+        } else {
+          console.log('> REQUEST GOT ABORTED')
+        }
+    })
+
+    request.resume(); // CONSUME ALL DATA
+},app);
+httpServer.on('listening', () => console.log('HTTP-Server is running.'));
+httpServer.listen(8090, '127.0.0.1');
+// httpServer.listen(3030, '127.0.0.1');
+// httpServer.listen(3030);
 // app.listen(8090, () => console.log('Server running'));
