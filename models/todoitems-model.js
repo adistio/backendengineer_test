@@ -12,10 +12,11 @@ const Todoitems = db.define('todos',{
     },
     activity_group_id: {
         type: DataTypes.INTEGER,
-        required: true,
+        allowNull: false,
     },
     title: {
         type: DataTypes.STRING,
+        allowNull: false,
     },
     is_active: {
         type: DataTypes.BOOLEAN,
