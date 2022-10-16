@@ -73,7 +73,7 @@ export const saveData = async (req, res) => {
             "message":"Success",
             "data": data
         };
-        return res.status(200).json(response);
+        return res.status(201).json(response);
     } catch (error) {
         return res.status(500).json({message: error.message});
     }
@@ -138,13 +138,13 @@ export const deleteData = async (req, res) => {
                 response = {
                     "status":"Success",
                     "message":"Success",
-                    "data": deletedRecord
+                    "data": {}
                 }; 
                 return res.status(200).json(response);
             } else {
                 response = {
                     "status":"Not Found",
-                    "message":`Todo with ID ${req.params.id} Not Found`,
+                    "message":`Activity with ID ${req.params.id} Not Found`,
                     "data": {}
                 };
                 return res.status(404).json(response);

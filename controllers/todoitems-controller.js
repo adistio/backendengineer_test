@@ -149,7 +149,7 @@ export const deleteData = async (req, res) => {
                 response = {
                     "status":"Success",
                     "message":"Success",
-                    "data": deletedRecord
+                    "data": {}
                 }; 
                 return res.status(200).json(response);
             } else {
@@ -175,6 +175,7 @@ export const validateData = (method) => {
         case 'saveData': {
             return [ 
                 check('title', 'title cannot be null').notEmpty(),
+                check('status', 'status cannot be null').notEmpty(),
                 check('activity_group_id', 'activity_group_id cannot be null').notEmpty(),
             ]   
         }
