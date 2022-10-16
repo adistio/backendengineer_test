@@ -175,7 +175,6 @@ export const validateData = (method) => {
         case 'saveData': {
             return [ 
                 check('title', 'title cannot be null').notEmpty(),
-                check('status', 'status cannot be null').notEmpty(),
                 check('activity_group_id', 'activity_group_id cannot be null').notEmpty(),
             ]   
         }

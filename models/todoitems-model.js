@@ -18,10 +18,6 @@ const Todoitems = db.define('todos',{
         type: DataTypes.STRING,
         allowNull: false,
     },
-    status: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
     is_active: {
         type: DataTypes.BOOLEAN,
         required: true,
