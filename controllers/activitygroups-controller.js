@@ -34,19 +34,20 @@ export const getDataById = async (req, res) => {
                     "message":"Success",
                     "data": result
                 };
+                return res.status(200).json(response);
             } else {
                 response = {
                     "status":"Not Found",
                     "message":`Activity with ID ${req.params.id} Not Found`,
                     "data": {}
                 };
+                return res.status(404).json(response);
             }
          }).catch((err) => {
             console.log(err);
          });
-        return res.status(200).json(response);
     } catch (error) {
-        return res.status(404).json({message: error.message});
+        return res.status(500).json({message: error.message});
     }
 }
  
@@ -62,7 +63,7 @@ export const saveData = async (req, res) => {
             "message":errors.array()[0].msg,
             "data": {}
         };
-        return res.json(response);
+        return res.status(400).json(response);
     }
 
     try {
@@ -72,9 +73,9 @@ export const saveData = async (req, res) => {
             "message":"Success",
             "data": data
         };
-        return res.status(201).json(response);
+        return res.status(200).json(response);
     } catch (error) {
-        return res.status(400).json({message: error.message});
+        return res.status(500).json({message: error.message});
     }
 }
  
@@ -90,7 +91,7 @@ export const updateData = async (req, res) => {
             "message":errors.array()[0].msg,
             "data": {}
         };
-        return res.json(response);
+        return res.status(404).json(response);
     }
     
     try {
@@ -106,20 +107,20 @@ export const updateData = async (req, res) => {
                     "message":"Success",
                     "data": result
                 };
+                return res.status(200).json(response);
             } else {
                 response = {
                     "status":"Not Found",
                     "message":`Activity with ID ${req.params.id} Not Found`,
                     "data": {}
                 };
+                return res.status(404).json(response);
             }
          }).catch((err) => {
             console.log(err);
          });
-
-        return res.status(200).json(response);
     } catch (error) {
-        return res.status(400).json({message: error.message});
+        return res.status(500).json({message: error.message});
     }
 }
  
@@ -151,7 +152,7 @@ export const deleteData = async (req, res) => {
         });
         return res.status(200).json(response);
     } catch (error) {
-        return res.status(400).json({message: error.message});
+        return res.status(500).json({message: error.message});
     }
 }
 
