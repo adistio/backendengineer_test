@@ -2,7 +2,7 @@
 import express from "express";
 
 // import controllers
-import { getAll, getDataById, saveData, deleteData, updateData } from "../controllers/activitygroups-controller.js";
+import { getAll, getDataById, saveData, deleteData, updateData, validateData } from "../controllers/activitygroups-controller.js";
  
 // express router
 const router = express.Router();
@@ -12,11 +12,11 @@ router.get('/', getAll);
 // Route get single Data
 router.get('/:id', getDataById);
 // Route create Data
-router.post('/', saveData);
+router.post('/', validateData('saveData'), saveData);
 // Route delete Data
 router.delete('/:id', deleteData);
 // Route update Data
-router.patch('/:id', updateData);
+router.patch('/:id', validateData('saveData'), updateData);
 
 // export router
 export default router;

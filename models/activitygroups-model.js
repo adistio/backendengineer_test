@@ -12,9 +12,12 @@ const Activitygroups = db.define('activities',{
     },
     title: {
         type: DataTypes.STRING,
+        allowNull: false,
     },
     email: {
         type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
     },
     createdAt: {
         allowNull: false,
